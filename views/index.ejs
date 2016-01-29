@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>We Love Science</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
+
+<body>
+  <div class="overlay"></div>
+  <script src="javascripts/jquery-2.2.0.min.js"></script>
+
+  <!-- JS Code to Change Background -->
+  <script>
+    (function() {
+      var counter = 0;
+      <% var output = 'var backgrounds = [' %>
+
+      <% for (var i=0; i < backgrounds.length; i++) { %>
+        <% if (i !== backgrounds.length - 1) { %>
+          <% output += "'" + backgrounds[i] + "'" + ","; %>
+          <% } else { %>
+          <%  output +=  "'" + backgrounds[i] + "'"; %>
+          <% } %>
+
+      <% } %>
+      <% output += "];" %>
+      <%- output %>
+
+      var bgCounter = 0;
+
+      function changeBackground() {
+        bgCounter = (bgCounter + 1) % backgrounds.length;
+        $('body').css('background', '#000 url("images/backgrounds/' + backgrounds[bgCounter] + '") no-repeat');
+        setTimeout(changeBackground, 10000);
+
+      }
+      changeBackground();
+    })();
+  </script>
+
+</body>
+
+</html>
